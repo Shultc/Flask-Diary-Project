@@ -1,0 +1,41 @@
+{% extends "index.html" %}
+
+{% block main %}
+<section class="diary-section">
+    <h2>Дневник программиста</h2>
+    
+    <form method="POST" action="{{ url_for('programmer_diary') }}" class="note-form">
+        <div class="form-group">
+            <label for="title">Заголовок записи:</label>
+            <input type="text" id="title" name="title" placeholder="Например: Первый день с Flask" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="content">Текст записи:</label>
+            <textarea id="content" name="content" rows="4" placeholder="Здесь я пишу свои мысли..." required></textarea>
+        </div>
+        
+        <button type="submit" class="btn-add">Добавить запись</button>
+    </form>
+</section>
+
+<section class="notes-list">
+    <h3>Мои записи</h3>
+    
+    {% if notes %}
+        <div class="cards-container">
+            {% for title, data in notes.items() %}
+                <div class="note-card">
+                    <div class="note-header">
+                        <h4>{{ title }}</h4>
+                        <span class="note-date">{{ data.date }}</span>
+                    </div>
+                    <p class="note-text">{{ data.content }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="empty-message">Пока нет ни одной записи. Добавьте первую!</p>
+    {% endif %}
+</section>
+{% endblock %}
