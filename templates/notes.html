@@ -9,14 +9,20 @@
             <label for="title">Заголовок записи:</label>
             <input type="text" id="title" name="title" placeholder="Например: Первый день с Flask" required>
         </div>
-        
+
+        <div class="form-group">
+            <label for="subtitle">Подзаголовок:</label>
+            <input type="text" id="subtitle" name="subtitle" placeholder="Краткое описание записи">
+        </div>
+
         <div class="form-group">
             <label for="content">Текст записи:</label>
             <textarea id="content" name="content" rows="4" placeholder="Здесь я пишу свои мысли..." required></textarea>
         </div>
-        
+
         <button type="submit" class="btn-add">Добавить запись</button>
     </form>
+
 </section>
 
 <section class="notes-list">
@@ -24,18 +30,24 @@
     
     {% if notes %}
         <div class="cards-container">
-            {% for title, data in notes.items() %}
+            {% for note in notes %}
                 <div class="note-card">
                     <div class="note-header">
-                        <h4>{{ title }}</h4>
-                        <span class="note-date">{{ data.date }}</span>
-                    </div>
-                    <p class="note-text">{{ data.content }}</p>
-                </div>
+                        <h4>{{ note.title }}</h4>
+                        {% if note.subtitle %}
+                            <span class="note-subtitle">{{ note.subtitle }}</span>
+                {% endif %}
+                <span class="note-date">{{ note.date.strftime('%d.%m.%Y %H:%M') }}</span>
+            </div>
+            <p class="note-text">{{ note.content }}</p>
+        </div>
             {% endfor %}
         </div>
     {% else %}
         <p class="empty-message">Пока нет ни одной записи. Добавьте первую!</p>
     {% endif %}
 </section>
+
+
+
 {% endblock %}

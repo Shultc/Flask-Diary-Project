@@ -123,6 +123,17 @@ main {
     font-style: italic;
 }
 
+.note-subtitle {
+    font-size: 0.9rem;
+    color: #3498db; 
+    font-weight: 500;
+    margin-right: 10px;
+    background-color: #e8f4fd; 
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+
 footer {
     text-align: center;
     padding: 20px;
